@@ -6,7 +6,7 @@ var methodOverride = require('method-override');
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
+//var io = require('socket.io')(server);
 
 // api ------------------------------------------------------------
 app.get('/api', function(req, res) {
@@ -34,35 +34,35 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-io.on('connection', function(socket) {
-    console.log('a user connected');
+// io.on('connection', function(socket) {
+//     console.log('a user connected');
 
-    socket.on('greet', function(times) {
-        console.log("received greeting");
+//     socket.on('greet', function(times) {
+//         console.log("received greeting");
         
-        if (times <= 0 || times > 100) {
-            times = 1;
-        }
+//         if (times <= 0 || times > 100) {
+//             times = 1;
+//         }
         
-        var i = 0;
-        var stop = setInterval(function() {
-            //var serviceToCall = process.env.SERVICE_B_MASTER_URL + getRandomInt(0, 0);
-            var serviceToCall = process.env.SERVICE_B_MASTER_URL;
-            request(serviceToCall, function(error, response, body) {
-                io.emit('hello', {
-                    message: body,
-                    timestamp: Date.now()
-                });
-                console.log("emitted hello from " + serviceToCall + ", who said: " + body);
-            });
-            i++;
-            if (i >= times) {
-                clearInterval(stop);
-            }
-        }, 100);
+//         var i = 0;
+//         var stop = setInterval(function() {
+//             //var serviceToCall = process.env.SERVICE_B_MASTER_URL + getRandomInt(0, 0);
+//             var serviceToCall = process.env.SERVICE_B_MASTER_URL;
+//             request(serviceToCall, function(error, response, body) {
+//                 io.emit('hello', {
+//                     message: body,
+//                     timestamp: Date.now()
+//                 });
+//                 console.log("emitted hello from " + serviceToCall + ", who said: " + body);
+//             });
+//             i++;
+//             if (i >= times) {
+//                 clearInterval(stop);
+//             }
+//         }, 100);
 
-    });
-});
+//     });
+// });
 
 server.listen(process.env.PORT || 4000);
 

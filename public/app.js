@@ -4,7 +4,8 @@ var app = angular.module('myApp', ['ngRoute']);
 //         templateUrl: '/index.html'
 //     });
 // }])
-app.controller('MainController', function($scope, $http, socket) {
+//app.controller('MainController', function($scope, $http, socket) {
+    app.controller('MainController', function($scope, $http) {
 
     $scope.messages = [];
     $scope.sayHelloToServer = function() {
@@ -51,18 +52,18 @@ app.controller('MainController', function($scope, $http, socket) {
 //   });
 // }]);
 
-app.factory('socket', ['$rootScope', function($rootScope) {
-    var socket = io.connect();
+// app.factory('socket', ['$rootScope', function($rootScope) {
+//     var socket = io.connect();
 
-    return {
-        on: function(eventName, callback) {
-            socket.on(eventName, callback);
-        },
-        emit: function(eventName, data) {
-            socket.emit(eventName, data);
-        }
-    };
-}]);
+//     return {
+//         on: function(eventName, callback) {
+//             socket.on(eventName, callback);
+//         },
+//         emit: function(eventName, data) {
+//             socket.emit(eventName, data);
+//         }
+//     };
+// }]);
 
 // app.controller('IndexController', function($scope, socket) {
 //   $scope.newCustomers = [];
