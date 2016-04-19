@@ -10,10 +10,10 @@ var server = require('http').Server(app);
 
 // api ------------------------------------------------------------
 app.get('/api', function(req, res) {
-    res.send('Hello from service A running on ' + os.hostname());
-    // request(process.env.SERVICE_B_MASTER_URL, function(error, response, body) {
-    //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
-    // });
+    // res.send('Hello from service A running on ' + os.hostname());
+    request(process.env.SERVICE_B_MASTER_URL, function(error, response, body) {
+        res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
+    });
 });
 
 
@@ -65,13 +65,6 @@ function getRandomInt(min, max) {
 // });
 
 server.listen(process.env.PORT || 4000);
-
-// var express = require('express');
-// var app = express();
-// var server = require('http').Server(app);
-// var io = require('socket.io')(server);
-
-// app.use(express.static(__dirname + '/public'));
 
 // io.on('connection', function(socket) {
 //   console.log('new connection');
