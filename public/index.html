@@ -13,7 +13,7 @@
 <body>
     <div ng-controller="MainController">
         <h2>Server Says</h2>
-        <button style="float: right" class="btn btn-md" ng-click="sayHelloToServer()">Say It Again</button>
+        <!--<button style="float: right" class="btn btn-md" ng-click="sayHelloToServer()">Say It Again</button>-->
         <div ng-repeat="message in messages track by $index">
             <span class="message" ng-style="getStyle(message)">{{message}}</span>
         </div>
