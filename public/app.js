@@ -4,6 +4,7 @@ var app = angular.module('myApp', ['ngRoute']);
 //         templateUrl: '/index.html'
 //     });
 // }])
+//
 //app.controller('MainController', function($scope, $http, socket) {
     app.controller('MainController', function($scope, $http) {
 
