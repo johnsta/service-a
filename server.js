@@ -6,33 +6,50 @@ var methodOverride = require('method-override');
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
-//var io = require('socket.io')(server);
 
 // api ------------------------------------------------------------
 app.get('/api', function(req, res) {
-    // res.send('Hello from service A running on ' + os.hostname());
-    request(process.env.SERVICE_B_MASTER_URL, function(error, response, body) {
-        res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
-    });
+    res.send('Hello from service A running on ' + os.hostname());
+    
+    // request(process.env.SERVICE_B_MASTER_URL, function(error, response, body) {
+    //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
+    // });
 });
-
-
 
 // application -------------------------------------------------------------
 app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
+
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');     // load the single view file (angular will handle the page changes on the front-end)
+});
+
+
+server.listen(process.env.PORT || 4000);
+
+
+
+
+
+
+
+
+
+
+
+
+
 // app.use(bodyParser.urlencoded({'extended': 'true'})); // parse application/x-www-form-urlencoded
 // app.use(bodyParser.json()); // parse application/json
 // app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
 // app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request
 
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
-});
+//var io = require('socket.io')(server);
+
 // io -------------------------------------------------------------
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+// function getRandomInt(min, max) {
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+// }
 
 // io.on('connection', function(socket) {
 //     console.log('a user connected');
@@ -64,7 +81,6 @@ function getRandomInt(min, max) {
 //     });
 // });
 
-server.listen(process.env.PORT || 4000);
 
 // io.on('connection', function(socket) {
 //   console.log('new connection');
