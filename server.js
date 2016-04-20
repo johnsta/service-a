@@ -9,11 +9,11 @@ var server = require('http').Server(app);
 
 // api ------------------------------------------------------------
 app.get('/api', function(req, res) {
-    res.send('Hello from service A running on ' + os.hostname());
+    // res.send('Hello from service A running on ' + os.hostname());
     
-    // request(process.env.SERVICE_B_MASTER_URL, function(error, response, body) {
-    //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
-    // });
+    request(process.env.SERVICE_B_MASTER_URL, function(error, response, body) {
+        res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
+    });
 });
 
 // application -------------------------------------------------------------
