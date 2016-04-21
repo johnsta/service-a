@@ -1,31 +1,42 @@
 var os = require('os');
 var request = require('request');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+var Redis = require('redis');
 
 var express = require('express');
 var app = express();
-var server = require('http').Server(app);
+//var server = require('http').Server(app);
 
 // api ------------------------------------------------------------
-app.get('/api', function(req, res) {
+app.get('/api', function (req, res) {
     res.send('Hello from service A running on ' + os.hostname());
-    
-    // request(process.env.SERVICE_B_MASTER_URL, function(error, response, body) {
+
+    // request(process.env.SERVICE_B_MASTER_URL, function (error, response, body) {
     //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
     // });
+    
+    // var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
+    // var serviceARequests;
+    // redis.incr('service-a-requests', function (err, reply) {
+    //     serviceARequests = reply;
+    // });
 });
+
+// app.get('/metrics', function (req, res) {
+//     var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
+//     redis.get('service-a-requests', function (err, reply) {
+//         res.send({ requestCount: reply });
+//     });
+// });
 
 // application -------------------------------------------------------------
 app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');     // load the single view file (angular will handle the page changes on the front-end)
 });
 
-
 var port = process.env.PORT || 4000;
-server.listen(port, function() {
+app.listen(port, function () {
     console.log("Listening on port " + port);
 });
 
@@ -40,10 +51,6 @@ server.listen(port, function() {
 
 
 
-// app.use(bodyParser.urlencoded({'extended': 'true'})); // parse application/x-www-form-urlencoded
-// app.use(bodyParser.json()); // parse application/json
-// app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
-// app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request
 
 //var io = require('socket.io')(server);
 
@@ -58,11 +65,11 @@ server.listen(port, function() {
 
 //     socket.on('greet', function(times) {
 //         console.log("received greeting");
-        
+
 //         if (times <= 0 || times > 100) {
 //             times = 1;
 //         }
-        
+
 //         var i = 0;
 //         var stop = setInterval(function() {
 //             //var serviceToCall = process.env.SERVICE_B_MASTER_URL + getRandomInt(0, 0);

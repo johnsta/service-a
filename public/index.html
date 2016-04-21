@@ -7,49 +7,27 @@
     <script src="app.js"></script>
     <!--<script src="/socket.io/socket.io.js"></script>-->
     <link rel="stylesheet" href="app.css">
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-combined.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 
 <body style="margin-left:10px; margin-right:10px;">
     <div ng-controller="MainController">
         <h2>Server Says</h2>
-        
-        <button style="float: right" class="btn btn-md" ng-click="sayHelloToServer()">Say It Again</button>
-        <div ng-repeat="message in messages track by $index">
-            <span class="message" ng-style="getStyle(message)">{{message}}</span>
-        </div>
-        <!--<div>
-            <button class="btn btn-md" ng-click="runHello()">Run</button>
-            <div>
-                <span ng-repeat="m in messages">{{printResponse(m.message)}} </span>
+
+        <div class="row">
+            <div class="col-xs-10">
+                <div ng-repeat="message in messages track by $index">
+                    <span class="message" ng-style="getStyle(message)">{{message}}</span>
+                </div>
             </div>
-        </div>-->
-        <!--<pre>{{messages}}</pre>-->
+            <div class="col-xs-2">
+                <button class="btn btn-md" ng-click="sayHelloToServer()">Say It Again</button>
+                
+                <!-- METRICS -->
+                <!--<h4>Count: {{metrics.requestCount | number}}</h4>-->
+            </div>
+        </div>
     </div>
 </body>
 
 </html>
-
-<!--<!doctype>
-<html ng-app="sampleApp">
-  <head>
-  </head>
-
-  <body ng-controller="IndexController">
-    <label>Please enter your name: </label>
-    <input ng-model="currentCustomer.name"/>
-    <button ng-click="join()">Join</button>
-    <br/>
-
-    <h1>New Customers: </h1>
-    <ul>
-      <li ng-repeat="customer in newCustomers">{{customer.name}}</li>
-    </ul>
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-route.js"></script>
-    <script src="app.js"></script>
-  </body>
-
-</html>-->
