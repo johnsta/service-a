@@ -1,10 +1,11 @@
 var os = require('os');
 var request = require('request');
-var Redis = require('redis');
+var morgan = require('morgan');
+//var Redis = require('redis');
 
 var express = require('express');
 var app = express();
-//var server = require('http').Server(app);
+app.use(require("morgan")("dev"));
 
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
@@ -21,15 +22,18 @@ app.get('/api', function (req, res) {
     // });
 });
 
-// app.get('/metrics', function (req, res) {
-//     var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
-//     redis.get('service-a-requests', function (err, reply) {
-//         res.send({ requestCount: reply });
-//     });
-// });
+app.get('/metrics', function (req, res) {
+    var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
+    redis.get('service-a-requests', function (err, reply) {
+        res.send({ requestCount: reply });
+    });
+});
+
+
 
 // application -------------------------------------------------------------
 app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
+
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');     // load the single view file (angular will handle the page changes on the front-end)
