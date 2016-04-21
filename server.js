@@ -28,7 +28,9 @@ app.get('/api', function (req, res) {
 });
 
 app.get('/metrics', function (req, res) {
-    var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
+    //var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
+    var myredis = require("url").parse(process.env.MYREDIS_URL);
+    var redis = Redis.createClient(myredis.port, myredis.hostname);
     redis.get('requestCount', function (err, reply) {
         res.send({ requestCount: reply });
     });
