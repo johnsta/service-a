@@ -1,7 +1,7 @@
 var os = require('os');
 var request = require('request');
 var morgan = require('morgan');
-//var Redis = require('redis');
+var Redis = require('redis');
 
 var express = require('express');
 var app = express();
