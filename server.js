@@ -18,13 +18,12 @@ app.get('/api', function (req, res) {
     // });
     
     //var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
-    var myredis = require("url").parse(process.env.MYREDIS_URL);
-    var redis = Redis.createClient(myredis.port, myredis.hostname);
-    console.log('myredis hostname ' + myredis.hostname + ", port " + myredis.port);
-    var requestCount;
-    redis.incr('requestCount', function (err, reply) {
-        requestCount = reply;
-    });
+    // var myredis = require("url").parse(process.env.MYREDIS_URL);
+    // var redis = Redis.createClient(myredis.port, myredis.hostname);
+    // var requestCount;
+    // redis.incr('requestCount', function (err, reply) {
+    //     requestCount = reply;
+    // });
 });
 
 app.get('/metrics', function (req, res) {
