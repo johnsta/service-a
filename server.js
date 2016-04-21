@@ -5,6 +5,8 @@ var Redis = require('redis');
 
 var express = require('express');
 var app = express();
+
+app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
 app.use(require("morgan")("dev"));
 
 // api ------------------------------------------------------------
@@ -15,16 +17,18 @@ app.get('/api', function (req, res) {
     //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
     // });
     
-    // var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
-    // var serviceARequests;
-    // redis.incr('service-a-requests', function (err, reply) {
-    //     serviceARequests = reply;
-    // });
+    //var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
+    var myredis = require("url").parse(process.env.MYREDIS_URL);
+    var redis = Redis.createClient(myredis.port, myredis.hostname);
+    var requestCount;
+    redis.incr('requestCount', function (err, reply) {
+        requestCount = reply;
+    });
 });
 
 app.get('/metrics', function (req, res) {
     var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
-    redis.get('service-a-requests', function (err, reply) {
+    redis.get('requestCount', function (err, reply) {
         res.send({ requestCount: reply });
     });
 });
@@ -32,8 +36,6 @@ app.get('/metrics', function (req, res) {
 
 
 // application -------------------------------------------------------------
-app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
-
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');     // load the single view file (angular will handle the page changes on the front-end)
