@@ -1,7 +1,6 @@
 var os = require('os');
 var request = require('request');
 var morgan = require('morgan');
-var Redis = require('redis');
 
 var express = require('express');
 var app = express();
@@ -13,23 +12,25 @@ app.use(require("morgan")("dev"));
 app.get('/api', function (req, res) {
     res.send('Hello from service A running on ' + os.hostname());
 
+    // Connect to redis container using environment variable
+    // var myredis = require('url').parse(process.env.MYREDIS_URL);
+    // var redis = require('redis').createClient(myredis.port, myredis.hostname);
+    
+    // Increment requestCount each time API is called
+    // redis.incr('requestCount', function (err, reply) {
+    //     var requestCount = reply;
+    // });
+    
+    // Invoke service-b
     // request(process.env.SERVICE_B_MASTER_URL, function (error, response, body) {
     //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
     // });
     
-    //var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
-    // var myredis = require("url").parse(process.env.MYREDIS_URL);
-    // var redis = Redis.createClient(myredis.port, myredis.hostname);
-    // var requestCount;
-    // redis.incr('requestCount', function (err, reply) {
-    //     requestCount = reply;
-    // });
 });
 
 app.get('/metrics', function (req, res) {
-    //var redis = Redis.createClient(6380, 'johnstaredis.redis.cache.windows.net', { auth_pass: 'lJxVLa0TanGJz8i204ku0ZT2zztznOReVmJbcxm5w10=', tls: { servername: 'johnstaredis.redis.cache.windows.net' } });
-    var myredis = require("url").parse(process.env.MYREDIS_URL);
-    var redis = Redis.createClient(myredis.port, myredis.hostname);
+    var myredis = require('url').parse(process.env.MYREDIS_URL);
+    var redis = require('redis').createClient(myredis.port, myredis.hostname);
     redis.get('requestCount', function (err, reply) {
         res.send({ requestCount: reply });
     });
