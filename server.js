@@ -37,9 +37,7 @@ app.get('/metrics', function (req, res) {
 });
 
 
-
 // application -------------------------------------------------------------
-
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');     // load the single view file (angular will handle the page changes on the front-end)
 });
@@ -49,68 +47,3 @@ app.listen(port, function () {
     console.log("Listening on port " + port);
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-//var io = require('socket.io')(server);
-
-// io -------------------------------------------------------------
-
-// function getRandomInt(min, max) {
-//     return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
-
-// io.on('connection', function(socket) {
-//     console.log('a user connected');
-
-//     socket.on('greet', function(times) {
-//         console.log("received greeting");
-
-//         if (times <= 0 || times > 100) {
-//             times = 1;
-//         }
-
-//         var i = 0;
-//         var stop = setInterval(function() {
-//             //var serviceToCall = process.env.SERVICE_B_MASTER_URL + getRandomInt(0, 0);
-//             var serviceToCall = process.env.SERVICE_B_MASTER_URL;
-//             request(serviceToCall, function(error, response, body) {
-//                 io.emit('hello', {
-//                     message: body,
-//                     timestamp: Date.now()
-//                 });
-//                 console.log("emitted hello from " + serviceToCall + ", who said: " + body);
-//             });
-//             i++;
-//             if (i >= times) {
-//                 clearInterval(stop);
-//             }
-//         }, 100);
-
-//     });
-// });
-
-
-// io.on('connection', function(socket) {
-//   console.log('new connection');
-
-//   socket.on('add-customer', function(customer) {
-//     io.emit('notification', {
-//       message: 'new customer',
-//       customer: customer
-//     });
-//   });
-// });
-
-// server.listen(4000, function() {
-//   console.log('server up and running at 4000 port');
-// });
