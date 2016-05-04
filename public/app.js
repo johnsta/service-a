@@ -6,7 +6,7 @@ var app = angular.module('myApp', ['ngRoute']);
         $http.get("/api").then(function(response) {
             $scope.messages.push(response.data);
 
-            // Make request to /metrics            
+            // TASK 4: Make request to /metrics            
             // $http.get("/metrics").then(function(response) {
             //     $scope.metrics = response.data;
             // });
