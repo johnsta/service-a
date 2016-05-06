@@ -12,21 +12,21 @@ app.use(require("morgan")("dev"));
 app.get('/api', function (req, res) {
     res.send('Hello from service A running on ' + os.hostname());
 
-    // TASK 4: Connect to redis container
+    // TASK 5: Invoke service-b
+    // request(TODO_SERVICE_B_URL, function (error, response, body) {
+    //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
+    // });
+
+    // TASK 8: Connect to redis container
     // var redis = require('redis').createClient(TODO_REDIS_PORT, TODO_REDIS_DOMAIN);
     
     // Increment requestCount each time API is called
     // redis.incr('requestCount', function (err, reply) {
     //     var requestCount = reply;
     // });
-    
-    // TASK 7: Invoke service-b
-    // request(TODO_SERVICE_B_URL, function (error, response, body) {
-    //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
-    // });
-    
 });
 
+// TASK 8
 // app.get('/metrics', function (req, res) {
 //     var redis = require('redis').createClient(TODO_REDIS_PORT, TODO_REDIS_DOMAIN);
 //     redis.get('requestCount', function (err, reply) {
