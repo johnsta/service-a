@@ -20,7 +20,9 @@ app.get('/api', function (req, res) {
     //     var requestCount = reply;
     // });
     
-    res.send('URL: ' + process.env.SERVICE_B-GO_URL);
+    console.log('URL: ' + process.env.SERVICE_B-GO_URL);
+
+    //res.send('URL: ' + process.env.SERVICE_B-GO_URL);
     // Invoke service-b
     request(process.env.SERVICE_B-GO_URL, function (error, response, body) {
         res.send('!!!Hello from service A running on ' + os.hostname() + ' and ' + body);
