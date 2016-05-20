@@ -26,7 +26,6 @@ app.get('/api', function (req, res) {
     // });
 });
 
-
 // app.get('/metrics', function (req, res) {
 //     var redis = require('redis').createClient(process.env.MYREDIS_PORT, process.env.MYREDIS_DOMAIN);
 //     redis.get('requestCount', function (err, reply) {
