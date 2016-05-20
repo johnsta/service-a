@@ -10,7 +10,7 @@ app.use(require("morgan")("dev"));
 
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
-   res.send('Hello from service A running on ' + os.hostname());
+    res.send('Hello from service A running on ' + os.hostname());
 
     // Connect to redis container using environment variables
     // var redis = require('redis').createClient(process.env.MYREDIS_PORT, process.env.MYREDIS_DOMAIN);
@@ -43,4 +43,3 @@ var port = process.env.PORT || 4000;
 app.listen(port, function () {
     console.log("Listening on port " + port);
 });
-
