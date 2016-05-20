@@ -11,7 +11,6 @@ app.use(require("morgan")("dev"));
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
     console.log('URL: ' + process.env.SERVICE_B-GO_URL);
-    
   //  res.send('Hello from service A running on ' + os.hostname());
 
     // Connect to redis container using environment variables
