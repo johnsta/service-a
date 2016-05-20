@@ -24,7 +24,6 @@ app.get('/api', function (req, res) {
     // request(process.env.SERVICE_B_MASTER_URL, function (error, response, body) {
     //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
     // });
-    
 });
 
 // app.get('/metrics', function (req, res) {
