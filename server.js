@@ -10,21 +10,20 @@ app.use(require("morgan")("dev"));
 
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
-    
-    // Connect to redis container with environment variables
-    var redis = require('redis').createClient(process.env.MYREDIS_PORT, process.env.MYREDIS_DOMAIN);
+    res.send('Hello from service A running on ' + os.hostname());
 
-    // Invoke "service b"
-    request(process.env.SERVICE_GO_URL, function (error, response, body) {
-        res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
-    });
-
+    // Connect to redis container using environment variables
+    // var redis = require('redis').createClient(process.env.MYREDIS_PORT, process.env.MYREDIS_DOMAIN);
     
     // Increment requestCount each time API is called
     // redis.incr('requestCount', function (err, reply) {
     //     var requestCount = reply;
     // });
-        
+    
+    // Invoke service-b
+    // request(process.env.SERVICE_GO_URL, function (error, response, body) {
+    //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
+    // });
 });
 
 // app.get('/metrics', function (req, res) {
