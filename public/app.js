@@ -7,9 +7,9 @@ var app = angular.module('myApp', ['ngRoute']);
             $scope.messages.push(response.data);
 
             // Make request to /metrics            
-            // $http.get("/metrics").then(function(response) {
-            //     $scope.metrics = response.data;
-            // });
+            $http.get("/metrics").then(function(response) {
+                $scope.metrics = response.data;
+            });
         });
     };
     
