@@ -21,7 +21,7 @@ app.get('/api', function (req, res) {
     // });
 
     // Invoke service-go
-    // request(process.env.SERVICE_GO_MASTER_URL, function (error, response, body) {
+    // request(process.env.SERVICE_GO_URL, function (error, response, body) {
     //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
     // });
 });
