@@ -12,16 +12,16 @@ app.use(require("morgan")("dev"));
 app.get('/api', function (req, res) {
     res.send('Hello from service A running on ' + os.hostname());
 
-    // Connect to redis container using environment variables
+    // Connect to redis container using environment variable
     // var redis = require('redis').createClient(process.env.MYREDIS_PORT, process.env.MYREDIS_DOMAIN);
-    
+
     // Increment requestCount each time API is called
     // redis.incr('requestCount', function (err, reply) {
     //     var requestCount = reply;
     // });
-    
+
     // Invoke service-go
-    // request(process.env.SERVICE_GO_URL, function (error, response, body) {
+    // request(process.env.SERVICE_GO_MASTER_URL, function (error, response, body) {
     //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
     // });
 });
@@ -32,7 +32,6 @@ app.get('/metrics', function (req, res) {
         res.send({ requestCount: reply });
     });
 });
-
 
 // application -------------------------------------------------------------
 app.get('/', function (req, res) {
