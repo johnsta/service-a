@@ -20,7 +20,7 @@ app.get('/api', function (req, res) {
     //     var requestCount = reply;
     // });
     
-    // Invoke service-b
+    // Invoke service-go
     // request(process.env.SERVICE_GO_URL, function (error, response, body) {
     //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
     // });
