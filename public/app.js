@@ -3,11 +3,11 @@ var app = angular.module('myApp', ['ngRoute']);
 
     $scope.messages = [];
     $scope.sayHelloToServer = function() {
-        $http.get("/api").then(function(response) {
+        $http.get("/api?_=" + Date.now()).then(function(response) {
             $scope.messages.push(response.data);
 
             // Make request to /metrics            
-            // $http.get("/metrics").then(function(response) {
+            // $http.get("/metrics?_=" + Date.now()).then(function(response) {
             //     $scope.metrics = response.data;
             // });
         });
