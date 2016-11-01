@@ -1,0 +1,17 @@
+version: "2"
+
+services:
+    service-a:
+        build: .
+        depends_on:
+            - service-b
+    service-b:
+        image: myreg-exp.azurecr.io/myuser/service-b
+    ci-service-tests:
+        depends_on:
+            - service-a
+        image: wernight/phantomjs
+        volumes:
+            - .:/src
+        working_dir: /src
+        command: ["phantomjs", "service-tests.js"]
