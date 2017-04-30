@@ -20,18 +20,13 @@ app.get('/', function (req, res) {
 
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
-    // Connect to redis container using environment variable
-    // var redis = require('redis').createClient("redis://myredis");
-
-    // Increment requestCount each time API is called
-    // redis.incr('requestCount', function (err, reply) {
-    //     var requestCount = reply;
-    // });
+    
+    res.send("Hello from service A");
 
     // Invoke service-b
-    request('http://service-b', function (error, response, body) {
-        res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
-    });
+    // request('http://service-b', function (error, response, body) {
+    //     res.send('Hello from service A running on ' + os.hostname() + ' and ' + body);
+    // });
 });
 
 // app.get('/metrics', function (req, res) {
@@ -54,3 +49,10 @@ process.on("SIGTERM", () => {
     console.log("Terminating...");
     server.close();
 });
+
+
+// var mongoClient = require("mongodb").MongoClient;
+// mongoClient.connect(process.env.MYMONGO_CONNECTION_STRING, function (err, db) {
+//     console.log('Connected to database ' + process.env.MYMONGO_CONNECTION_STRING);
+//     db.close();
+// });

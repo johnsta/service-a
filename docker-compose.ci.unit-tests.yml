@@ -1,9 +1,0 @@
-version: "2"
-
-services:
-    ci-unit-tests:
-        image: node:argon
-        volumes:
-            - .:/src
-        working_dir: /src
-        command: ["node", "unit-tests.js"]
